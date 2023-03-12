@@ -56,18 +56,21 @@ const questions = [
 
 // TODO: Create a function to write README file
 // function writeFile(fileName, data) {}
+const generateReadme = ({ title, description, installation, usage, credit, license, test, github, email }) =>
+    'Title: ' + title + '\n' + description + '\n' + installation + '\n' + usage + '\n' + credit + '\n' + license + '\n' + test + '\n' + github + '\n' + email;
+
 
 // TODO: Create a function to initialize app
 function init() {
     inquirer.prompt(questions)
-    .then((answers) => {
-        const readmeContent = generateReadme(answers);
-        
-        writeFile('README.md', readmeContent, (err) =>
-        err ? console.log(err) : console.log('README.md created Successfully!')
-        );
-    });
+    .then((answers) => writeFile('README.md', generateReadme(answers)))
+    .then(() => console.log('README.md created Successfully!'))
+    .catch((err) => console.error(err));
 };
 
 // Function call to initialize app
 init();
+
+module.exports = {
+    // ??? license n such..
+}
