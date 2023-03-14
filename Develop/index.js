@@ -3,6 +3,9 @@ const inquirer = require('inquirer');
 const { writeFile } = require('fs').promises;
 const markDownGen = require('./utils/generateMarkdown');
 
+// const ps = require("prompt-sync");
+// const prompt = ps({sigint: true});
+
 
 // TODO: Create an array of questions for user input
 const questions = [
@@ -35,12 +38,12 @@ const questions = [
         type: 'list',
         name: 'license',
         message: 'Select a License for your project.',
-        choices: ['MIT','','','','Other'],
+        choices: ['MIT','Apache','BSD','IBM','Eclipse'],
     },
     {
         type: 'input',
         name: 'test',
-        message: 'Provide written tests and examples of running them application.',
+        message: 'Provide written tests and examples of running the application or enter N/A.',
     },
     {
         type: 'input',
@@ -54,23 +57,13 @@ const questions = [
     },
 ];
 
-// TODO: Create a function to write README file
-// function writeFile(fileName, data) {}
-const generateReadme = ({ title, description, installation, usage, credit, license, test, github, email }) =>
-    'Title: ' + title + '\n' + description + '\n' + installation + '\n' + usage + '\n' + credit + '\n' + license + '\n' + test + '\n' + github + '\n' + email;
-
-
 // TODO: Create a function to initialize app
 function init() {
     inquirer.prompt(questions)
-    .then((answers) => writeFile('README.md', generateReadme(answers)))
+    .then((answers) => writeFile('README.md', markDownGen.generateMarkdown(answers)))
     .then(() => console.log('README.md created Successfully!'))
     .catch((err) => console.error(err));
 };
 
 // Function call to initialize app
 init();
-
-module.exports = {
-    // ??? license n such..
-}
