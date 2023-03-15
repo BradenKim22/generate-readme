@@ -68,4 +68,6 @@ If you have any other additional questions email me at ${email} with '${title}' 
 }
   
 
-module.exports = generateMarkdown
+module.exports = {
+  generateMarkdown
+};
